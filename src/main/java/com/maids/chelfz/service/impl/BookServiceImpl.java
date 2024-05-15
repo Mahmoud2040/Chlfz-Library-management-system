@@ -22,6 +22,7 @@ public class BookServiceImpl implements BookService {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     @Override
     public List<Book> getAllBooks() {
+
         return bookRepository.findAll();
     }
 
