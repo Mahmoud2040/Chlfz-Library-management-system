@@ -53,9 +53,7 @@ class BookController {
     @PostMapping
     public ResponseEntity<ApiResponse<Book>> addBook(@Valid @RequestBody Book book) {
        Optional<Book> existBook = bookServiceImpl.getBookByTitle(book.getTitle());
-       if(existBook.isPresent()){
-           throw new ConflictException("this book is already exist");
-       }
+
 
         Book savedBook = bookServiceImpl.saveBook(book);
         return ResponseEntity.status(HttpStatus.CREATED).body(bookApiResponseManager.successMassageData("Book Added Successfully",savedBook));

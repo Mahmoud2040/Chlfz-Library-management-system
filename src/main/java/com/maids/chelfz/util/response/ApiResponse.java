@@ -11,11 +11,11 @@ import org.springframework.http.HttpStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApiResponse<T> {
-    private HttpStatus status;
+    private String status;
     private String message;
     private T data;
 
-    public ApiResponse(HttpStatus status, String message) {
+    public ApiResponse(String status, String message) {
         this.status = status;
         this.message = message;
     }
