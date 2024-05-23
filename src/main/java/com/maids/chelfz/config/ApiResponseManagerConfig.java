@@ -1,6 +1,7 @@
 package com.maids.chelfz.config;
 
 import com.maids.chelfz.entity.Book;
+import com.maids.chelfz.entity.Borrow;
 import com.maids.chelfz.entity.Patron;
 import com.maids.chelfz.util.response.ApiResponseManager;
 import com.maids.chelfz.util.response.impl.DefaultApiResponseManager;
@@ -42,6 +43,13 @@ public class ApiResponseManagerConfig {
     @Bean
     @Primary
     public ApiResponseManager<Patron> patronApiResponseManager() {
+        return new ItemApiResponseManager<>();
+    }
+
+
+    @Bean
+    @Primary
+    public ApiResponseManager<Borrow> BorrowApiResponseManager() {
         return new ItemApiResponseManager<>();
     }
 }
