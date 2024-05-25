@@ -35,5 +35,4 @@ public class Borrow implements Serializable {
     private LocalDate returnDate;
 
 
-
 }

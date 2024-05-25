@@ -50,23 +50,25 @@ public class BorrowServiceImpl implements BorrowService {
     @Override
     @Transactional
     public Borrow borrowBook(Long bookId, Long patronId) {
+        Book book = bookServiceImpl.getBookById(bookId)
+                .orElseThrow(() -> new RecordNotFoundException("Book not found"));
+
+        //Borrow Exception
+        if (book.getIsBorrowed()) {
+            throw new ConflictException("This book is already borrowed");
+        }
 
             Patron patron = patronServiceImpl.getPatronById(patronId)
                     .orElseThrow(() -> new RecordNotFoundException("Patron not found"));
 
-            Book book = bookServiceImpl.getBookById(bookId)
-                    .orElseThrow(() -> new RecordNotFoundException("Book not found"));
 
-            if (book.getIsBorrowed()) {
-                throw new ConflictException("This book is already borrowed");
-            }
 
             LocalDate todayDate = LocalDate.now();
             book.setIsBorrowed(true);
             bookServiceImpl.saveBook(book);
-
-        return borrowRepository.save(new Borrow(null, book, patron, todayDate, null));
+        return borrowRepository.save(new Borrow(null,book, patron, todayDate,null));
         }
+
 
 
     @Override
@@ -75,7 +77,7 @@ public class BorrowServiceImpl implements BorrowService {
         Borrow borrow = borrowRepository.findByPatronIdAndBookId(bookId, patronId)
                 .orElseThrow(() -> new RecordNotFoundException("No borrow record found for Patron: " + patronId + " and book: " + bookId));
 
-        borrowRepository.delete(borrow);
+
         Book book = borrow.getBook();
         book.setIsBorrowed(false);
         bookServiceImpl.saveBook(book);

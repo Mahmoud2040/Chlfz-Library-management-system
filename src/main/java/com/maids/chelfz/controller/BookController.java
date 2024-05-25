@@ -54,7 +54,10 @@ class BookController {
     public ResponseEntity<ApiResponse<Book>> addBook(@Valid @RequestBody Book book) {
        Optional<Book> existBook = bookServiceImpl.getBookByTitle(book.getTitle());
 
-
+        if ( existBook.isPresent()) {
+            throw new RecordNotFoundException("this Book is already exist");
+        }
+        //book DTO
         Book savedBook = bookServiceImpl.saveBook(book);
         return ResponseEntity.status(HttpStatus.CREATED).body(bookApiResponseManager.successMassageData("Book Added Successfully",savedBook));
     }
@@ -64,6 +67,9 @@ class BookController {
         if ( existingBookOptional.isEmpty()) {
              throw new RecordNotFoundException("this Book Not Found");
         }
+
+        //Fill book data as a method
+
         Book existingBook = existingBookOptional.get();
         existingBook.setTitle(updatedBook.getTitle());
         existingBook.setAuthor(updatedBook.getAuthor());
@@ -83,6 +89,7 @@ class BookController {
             throw new RecordNotFoundException("this Book Not Found");
         }
         bookServiceImpl.deleteBook(id);
+
         return ResponseEntity.ok(defualtApiResponseManager.successMassage( "Deleted successfully"));
     }
 

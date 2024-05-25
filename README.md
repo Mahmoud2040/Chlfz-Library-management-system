@@ -86,6 +86,7 @@ The Library Management System API is built using Spring Boot. This system allows
     ```
 
 ### API Documentation
+#### Swagger URL : /swagger-ui/index.html#/
 
 #### Book Management Endpoints
 1. **Get All Books**

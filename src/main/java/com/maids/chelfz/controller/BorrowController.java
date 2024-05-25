@@ -21,13 +21,12 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api") //borrow
+
 public class BorrowController {
 
 
     private final BorrowServiceImpl borrowServiceImpl;
-    private final BookServiceImpl bookServiceImpl;
-    private final PatronServiceImpl patronServiceImpl;
     private final ApiResponseManager<Void> defaultApiResponseManager;
     private final ApiResponseManager<Borrow> borrowApiResponseManager;
 
@@ -37,8 +36,6 @@ public class BorrowController {
                             ApiResponseManager<Void> defualtApiResponseManager,
                             ApiResponseManager<Borrow> borrowApiResponseManager) {
         this.borrowServiceImpl = borrowServiceImpl;
-        this.bookServiceImpl = bookServiceImpl;
-        this.patronServiceImpl = patronServiceImpl;
         this.defaultApiResponseManager = defualtApiResponseManager;
         this.borrowApiResponseManager = borrowApiResponseManager;
     }
@@ -56,8 +53,6 @@ public class BorrowController {
         return ResponseEntity.ok(defaultApiResponseManager.successMassage( "Book returned successfully for Patron: " + patronId + " and book: " + bookId));
     }
 
-
-    //Todo improve to be as template
     @GetMapping("/getBorrowRecords")
     public ResponseEntity<List<Borrow>> getAllBorrowRecords() {
         return ResponseEntity.ok(borrowServiceImpl.borrowRecords());

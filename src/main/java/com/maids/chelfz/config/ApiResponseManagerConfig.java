@@ -13,6 +13,14 @@ import org.springframework.context.annotation.Primary;
 
 import java.util.List;
 
+
+
+/**
+ * Configuration class for setting up various ApiResponseManager beans.
+ * This class defines beans for managing API responses for different entity types
+ * such as Book, Patron, and Borrow. Each bean provides a specific response management
+ * strategy to be used throughout the application.
+ */
 @Configuration
 public class ApiResponseManagerConfig {
 
@@ -25,7 +33,6 @@ public class ApiResponseManagerConfig {
     public ApiResponseManager<List<Book>> BookListApiResponseManager() {
         return new ListApiResponseManager<>();
     }
-
 
     @Bean
     @Primary
