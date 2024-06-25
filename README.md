@@ -43,13 +43,15 @@ The Library Management System API is built using Spring Boot. This system allows
   - **Port Mapping**: Host port 5432 to container port 5432
 
 ### Security
-- JWT-based authorization is implemented to protect the API endpoints.
+-  basic authentication is implemented to protect the API endpoints.
 
 ### Aspects 
 - Logging is implemented using Aspect-Oriented Programming (AOP) to log method calls, exceptions, and performance metrics of certain operations like book additions, updates, and patron transactions.
 
-### Caching 
-- Utilizes Spring's caching mechanisms to cache frequently accessed data, such as book details or patron information, to improve system performance.
+### Caching
+- Currently, caching has not been added to the system. However, we plan to implement it soon to enhance performance.
+- We will utilize Spring's caching mechanisms to cache frequently accessed data, such as book details or patron information.
+- Redis will be used as the caching provider to ensure efficient and fast access to cached data.
 
 ### Transaction Management
 - Implements declarative transaction management using Spring's @Transactional annotation to ensure data integrity during critical operations.
